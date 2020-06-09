@@ -8,22 +8,26 @@ import ups.edu.ec.Dao.LibroDAO;
 public class JPADAOFactory extends DAOFactory{
 
 	@Override
-	public CapituloDAO getTargetaDAO() {
+	public CapituloDAO getCapituloDAO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LibroDAO getPedidoDAO() {
+	public LibroDAO getLibroDAO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public AutorDAO getComidaDAO() {
+	public AutorDAO getAutorDAO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+
+	
 
 	
 

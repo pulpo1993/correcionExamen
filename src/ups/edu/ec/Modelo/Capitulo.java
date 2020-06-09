@@ -1,19 +1,24 @@
 package ups.edu.ec.Modelo;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Capitulo implements Serializable{
 	
 	
 	
-	 @Id
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
 	 private int codigo;
 	 private int numero;
 	 private String titulo;
@@ -24,7 +29,7 @@ public class Capitulo implements Serializable{
 	 private Libro libro;
 	
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn
 	private Autor autor;
 	 
@@ -38,7 +43,16 @@ public class Capitulo implements Serializable{
 		}
 	 
 	 
-	 public Capitulo() {
+	 public Capitulo(int numero, String titulo, Libro libro, Autor autor) {
+		super();
+		this.numero = numero;
+		this.titulo = titulo;
+		this.libro = libro;
+		this.autor = autor;
+	}
+
+
+	public Capitulo() {
 			super();
 		}
 	 

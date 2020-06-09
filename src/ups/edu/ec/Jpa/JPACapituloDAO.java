@@ -2,6 +2,8 @@ package ups.edu.ec.Jpa;
 
 
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import ups.edu.ec.Dao.CapituloDAO;
@@ -15,13 +17,21 @@ public class JPACapituloDAO extends JPAGenericDAO<Capitulo, Integer> implements 
 		super(Capitulo.class);
 	}
 
-	@Override
-	public Capitulo findByNumero(int numTar) {
-				
-		String jpql="SELECT c FROM Capitulo c WHERE c.numero="+numTar;
-		Query query=em.createQuery(jpql);
-		Capitulo c=(Capitulo) query.getSingleResult();
-		
-		return c;
+	@Override 
+	public List<Capitulo> BuscarLibrosByContext(String context){
+		Query query= em.createNamedQuery("getByContext");
+		query.setParameter("context", context);
+		List<Capitulo> respuesta = (List<Capitulo>) query.getResultList();
+		return respuesta; 
 	}
+	
+	@Override
+	public List<Capitulo> BuscarLibrosByCodigoAutor(int codigo){
+		Query query= em.createNamedQuery("getByAutor");
+		query.setParameter("codigo", codigo);
+		List<Capitulo> respuesta = (List<Capitulo>) query.getResultList();
+		return respuesta;
+	}
+
+	
 }

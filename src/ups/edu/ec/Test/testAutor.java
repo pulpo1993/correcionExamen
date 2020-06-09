@@ -10,10 +10,10 @@ public class testAutor {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		EntityManager em = Persistence.createEntityManagerFactory("RecuperacionExamen").createEntityManager();
-		Autor a = new Autor(1,"Juan","Ecuatoriano");
+		Autor a = new Autor(1,"Tito","Ecuatoriana");
 		em.getTransaction().begin();
 		em.persist(a);
-		em.persist(new Autor(2,"Juan","Ecuatoriano"));
+		//em.persist(new Autor(2,"Juan","Colombiana"));
 		em.getTransaction().commit();
 	}
 

@@ -22,7 +22,7 @@ public class JPAGenericDAO<T,ID> implements GenericDAO<T, ID>{
 
     public JPAGenericDAO(Class<T> persistentClass) {
 	this.persistentClass = persistentClass;
-	this.em = Persistence.createEntityManagerFactory("jpa").createEntityManager();
+	this.em = Persistence.createEntityManagerFactory("RecuperacionExamen").createEntityManager();
     }
 
 	@Override
@@ -74,12 +74,6 @@ public class JPAGenericDAO<T,ID> implements GenericDAO<T, ID>{
 		
 	}
 
-	@Override
-	public void deleteByID(ID id) {
-		T entity = this.read(id);//PRIMERO DEBE SER BUSCADA PARA LUEGO SER ELIMINADA
-		if (entity != null)
-		    this.delete(entity);	   
-	}
 
 	@Override
 	public List<T> find() {
@@ -111,6 +105,18 @@ public class JPAGenericDAO<T,ID> implements GenericDAO<T, ID>{
 
 	@Override
 	public List<T> find(String[] attributes, String[] values, String order, int index, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createTable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public T findById(ID id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

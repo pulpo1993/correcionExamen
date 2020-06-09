@@ -9,10 +9,15 @@ public abstract class DAOFactory {
 		return factory;
 	}
 
-	public abstract CapituloDAO getTargetaDAO();
+	public abstract CapituloDAO getCapituloDAO();
 
-	public abstract LibroDAO getPedidoDAO();
+	public abstract LibroDAO getLibroDAO();
 
-	public abstract AutorDAO getComidaDAO();
+	public abstract AutorDAO getAutorDAO();
+
+	public static DAOFactory getDaoFactory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
