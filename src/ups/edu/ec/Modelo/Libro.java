@@ -1,11 +1,17 @@
 package ups.edu.ec.Modelo;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+
 
 
 
@@ -17,13 +23,16 @@ public class Libro implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 	private String nombre;
-	private String isBN;
-	private int numPaginacion;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
-	private Set<Capitulo> capitulos;
+	@Column(name = "ISBN", unique = true, nullable = false)
+	private String ISBN;
+	private int numPaginas;
+	@OneToMany(cascade= CascadeType.ALL, mappedBy = "libro")
+	private Set<Capitulo> listaCapitulos = new HashSet<Capitulo>(); 
 	
 	
 	
@@ -33,24 +42,22 @@ public class Libro implements Serializable {
 
 
 
-	public Libro(int codigo, String nombre, String isBN, int numPaginacion, Set<Capitulo> capitulos) {
+	public Libro(String nombre, String iSBN, int numPaginas) {
 		super();
-		this.codigo = codigo;
 		this.nombre = nombre;
-		this.isBN = isBN;
-		this.numPaginacion = numPaginacion;
-		this.capitulos = capitulos;
+		ISBN = iSBN;
+		this.numPaginas = numPaginas;
 	}
 
 	
 
-
-
-	public Libro(String nombre, String isBN, int numPaginacion) {
+	public Libro(int codigo, String nombre, String iSBN, int numPaginas, Set<Capitulo> listaCapitulos) {
 		super();
+		this.codigo = codigo;
 		this.nombre = nombre;
-		this.isBN = isBN;
-		this.numPaginacion = numPaginacion;
+		ISBN = iSBN;
+		this.numPaginas = numPaginas;
+		this.listaCapitulos = listaCapitulos;
 	}
 
 
@@ -79,59 +86,54 @@ public class Libro implements Serializable {
 
 
 
-	public String getIsBN() {
-		return isBN;
+	public String getISBN() {
+		return ISBN;
 	}
 
 
 
-	public void setIsBN(String isBN) {
-		this.isBN = isBN;
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
 	}
 
 
 
-	public int getNumPaginacion() {
-		return numPaginacion;
+	public int getNumPaginas() {
+		return numPaginas;
 	}
 
 
 
-	public void setNumPaginacion(int numPaginacion) {
-		this.numPaginacion = numPaginacion;
+	public void setNumPaginas(int numPaginas) {
+		this.numPaginas = numPaginas;
 	}
 
 
 
-	public Set<Capitulo> getCapitulos() {
-		return capitulos;
+	public Set<Capitulo> getListaCapitulos() {
+		return listaCapitulos;
 	}
 
 
 
-	public void setCapitulos(Set<Capitulo> capitulos) {
-		this.capitulos = capitulos;
+	public void setListaCapitulos(Set<Capitulo> listaCapitulos) {
+		this.listaCapitulos = listaCapitulos;
 	}
-
-
 	
 	public void addCapitulo(Capitulo capitulo) {
-		this.capitulos.add(capitulo);
+		this.listaCapitulos.add(capitulo);
 	}
 	
 	public void removeCapitulo(Capitulo capitulo) {
-		this.capitulos.remove(capitulo);
+		this.listaCapitulos.remove(capitulo);
 	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((capitulos == null) ? 0 : capitulos.hashCode());
 		result = prime * result + codigo;
-		result = prime * result + ((isBN == null) ? 0 : isBN.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + numPaginacion;
 		return result;
 	}
 
@@ -146,24 +148,7 @@ public class Libro implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Libro other = (Libro) obj;
-		if (capitulos == null) {
-			if (other.capitulos != null)
-				return false;
-		} else if (!capitulos.equals(other.capitulos))
-			return false;
 		if (codigo != other.codigo)
-			return false;
-		if (isBN == null) {
-			if (other.isBN != null)
-				return false;
-		} else if (!isBN.equals(other.isBN))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (numPaginacion != other.numPaginacion)
 			return false;
 		return true;
 	}
@@ -172,10 +157,9 @@ public class Libro implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Libro [codigo=" + codigo + ", nombre=" + nombre + ", isBN=" + isBN + ", numPaginacion=" + numPaginacion
-				+ ", capitulos=" + capitulos + "]";
+		return "Libro [codigo=" + codigo + ", nombre=" + nombre + ", ISBN=" + ISBN + ", numPaginas=" + numPaginas + "]";
 	}
-	
+
 	
 	
 	
